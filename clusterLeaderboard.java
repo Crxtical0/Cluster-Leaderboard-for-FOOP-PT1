@@ -67,8 +67,11 @@ public class clusterLeaderboard {
         return choice;
     }
 
+    public static void showLeaderboard() {
+        
+    }
     public static void addEvent(String eventName) {
-        if (eventCount > 20) {
+        if (eventCount > 19) {
             System.out.println("Max Events Reached.");
         } else {
             eventNames[eventCount] = eventName;
@@ -118,7 +121,7 @@ public class clusterLeaderboard {
 
         for (int j = 0; j < 8; j++) {
             if (CLUSTER_NAMES[j].equals(cluster)) {
-                System.out.println("Total Scored Points: " + totalClusterScore);
+                System.out.println("Total Scored Points: " + totalClusterScore[j]);
                 break;
             }
         }
