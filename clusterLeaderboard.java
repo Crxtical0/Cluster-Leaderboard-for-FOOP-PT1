@@ -2,11 +2,19 @@ import java.util.Scanner;
 
 public class clusterLeaderboard {
     static String[] eventNames = new String[20];
+    static double[] totalClusterScore = new double[8];
+    static double clusterEventScore[] = new double[160];
+    static String clusterEventNameScored[] = new String[160];
+    static String clusterNameScored[] = new String[160];
+    static int scoredCount = 0;
     static int eventCount = 0;
     static Scanner sc = new Scanner(System.in);
-
+    
+    static final String CLUSTER_NAMES[] = {"Manresa", "Pamplona", "Jerusalem", "Montserrat", "Paris", "Barcelona", "Salamanca", "Rome"};
     public static void main(String[] args) {
         int choice;
+        String eventName;
+        String cluster;
         do {
             choice = displayMenu();
 
@@ -15,10 +23,18 @@ public class clusterLeaderboard {
                     break;
                 case 2:
                     System.out.println("What is the Event Name?");
-                    String eventName = sc.nextLine();
+                    eventName = sc.nextLine();
                     addEvent(eventName);
                     break;
                 case 3:
+                    System.out.println("Which cluster?");
+                    cluster = sc.nextLine();
+                    System.out.println("Which event?");
+                    eventName = sc.nextLine();
+                    System.out.println("How many points?");
+                    double score = sc.nextDouble();
+                    recordScore(cluster, eventName, score);
+                    System.out.println(clusterNameScored[0] + clusterEventNameScored[0] + clusterEventScore[0]);
                     break;
                 case 4:
                     break;
@@ -58,6 +74,26 @@ public class clusterLeaderboard {
         }
     }
 
+    public static void recordScore(String cluster, String eventName, double score) {
+        
+        if (score < 0) {
+            System.out.println("Negative Scores are not allowed.");
+            return;
+        }
+
+        clusterNameScored[scoredCount] = cluster;
+        clusterEventNameScored[scoredCount] = eventName;
+        clusterEventScore[scoredCount] = score;
+        
+        for (int i = 0; i < 8; i++) {
+            if (cluster == CLUSTER_NAMES[i]) {
+                totalClusterScore[i] = totalClusterScore[i] + score;
+                break;
+            }
+        }
+        System.out.println("Score successfully recorded!");
+        scoredCount++;
+    }
     public static void showEvents() {
         if (eventCount == 0) {
             System.out.println("No Events Registered.");
