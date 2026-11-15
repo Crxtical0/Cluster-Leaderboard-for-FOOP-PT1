@@ -34,9 +34,11 @@ public class clusterLeaderboard {
                     System.out.println("How many points?");
                     double score = sc.nextDouble();
                     recordScore(cluster, eventName, score);
-                    System.out.println(clusterNameScored[0] + clusterEventNameScored[0] + clusterEventScore[0]);
                     break;
                 case 4:
+                    System.out.println("Which cluster?");
+                    cluster = sc.nextLine();
+                    clusterSummary(cluster);
                     break;
                 case 5:
                     showEvents();
@@ -86,7 +88,7 @@ public class clusterLeaderboard {
         clusterEventScore[scoredCount] = score;
         
         for (int i = 0; i < 8; i++) {
-            if (cluster == CLUSTER_NAMES[i]) {
+            if (cluster.equals(CLUSTER_NAMES[i])) {
                 totalClusterScore[i] = totalClusterScore[i] + score;
                 break;
             }
@@ -103,6 +105,22 @@ public class clusterLeaderboard {
                 System.out.println((i + 1) + ". " + eventNames[i]);
             }
             System.out.println("===========================");
+        }
+    }
+
+    public static void clusterSummary(String cluster) {
+        
+        for (int i = 0; i < scoredCount; i++) {
+            if (cluster.equals(clusterNameScored[i])) {
+                System.out.printf("Event Name: %s - %.2f%n", clusterEventNameScored[i], clusterEventScore[i]);
+            }
+        }
+
+        for (int j = 0; j < 8; j++) {
+            if (CLUSTER_NAMES[j].equals(cluster)) {
+                System.out.println("Total Scored Points: " + totalClusterScore);
+                break;
+            }
         }
     }
 }
