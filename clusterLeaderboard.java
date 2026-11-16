@@ -31,8 +31,18 @@ public class clusterLeaderboard {
                 case 3:
                     System.out.println("Which cluster?");
                     cluster = sc.nextLine();
+                    if (eventCount == 0) {
+                        System.out.println("No Events Registered.");
+                        break;
+                    }
                     System.out.println("Which event?");
+
+                    showEvents();
                     eventName = sc.nextLine();
+                    if (!isValidEvent(eventName)) {
+                        System.out.println("Invalid event. Please add the event first.");
+                        break;
+                    }
                     System.out.println("How many points?");
                     double score = sc.nextDouble();
                     recordScore(cluster, eventName, score);
@@ -146,6 +156,14 @@ public class clusterLeaderboard {
         }
     }
 
+    public static boolean isValidEvent(String eventName) {
+        for (int i = 0; i < eventCount; i++) {
+            if (eventNames[i].equals(eventName)) {
+                return true;
+            }
+        }
+        return false;
+    }
     public static void clusterSummary(String cluster) {
         
         for (int i = 0; i < scoredCount; i++) {
