@@ -51,6 +51,7 @@ public class clusterLeaderboard {
                     }
                     System.out.println("How many points?");
                     double score = sc.nextDouble();
+                    sc.nextLine();
                     recordScore(cluster, eventName, score);
                     break;
                 case 4:
