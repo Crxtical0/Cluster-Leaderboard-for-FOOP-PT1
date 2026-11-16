@@ -46,6 +46,7 @@ public class clusterLeaderboard {
                     showEvents();
                     break;
                 case 6:
+                    System.out.printf("Events Registered: %d%nScores Recorded: %d%nHighest Cluster: %.2f%nLowest Cluster: %.2f%n", eventCount, scoredCount, sortedClusterNames[0], sortedClusterNames[7]);
                     break;
                 default:
                     System.out.println("Invalid Output. Please try again.");
