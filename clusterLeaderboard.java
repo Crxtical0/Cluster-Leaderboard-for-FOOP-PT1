@@ -9,7 +9,8 @@ public class clusterLeaderboard {
     static int scoredCount = 0;
     static int eventCount = 0;
     static Scanner sc = new Scanner(System.in);
-    
+    static String sortedClusterNames[] = new String[8];
+    static double sortedFinalScores[] = new double[8];
     static final String CLUSTER_NAMES[] = {"Manresa", "Pamplona", "Jerusalem", "Montserrat", "Paris", "Barcelona", "Salamanca", "Rome"};
     public static void main(String[] args) {
         int choice;
@@ -20,6 +21,7 @@ public class clusterLeaderboard {
 
             switch (choice) {
                 case 1:
+                    showLeaderboard();
                     break;
                 case 2:
                     System.out.println("What is the Event Name?");
@@ -68,9 +70,31 @@ public class clusterLeaderboard {
     }
 
     public static void showLeaderboard() {
-        
+        // implement bubble sort
+        for (int k = 0; k < 8; k++) {
+            sortedClusterNames[k] = CLUSTER_NAMES[k];
+            sortedFinalScores[k] = totalClusterScore[k];       
+        }
+        for (int i = 0; i < 8 - 1; i++) {
+            for (int j = 0; j < 8 - i - 1; j++) {
+                if (sortedFinalScores[j] < sortedFinalScores[j + 1]) {
+                    double tempScore = sortedFinalScores[j];
+                    sortedFinalScores[j] = sortedFinalScores[j + 1];
+                    sortedFinalScores[j + 1] = tempScore;
+                    String tempName = sortedClusterNames[j];
+                    sortedClusterNames[j] = sortedClusterNames[j + 1];
+                    sortedClusterNames[j + 1] = tempName;
+                }
+            }
+        }
+        System.out.println("=====LEADERBOARD=====");
+        for (int l = 0; l < 8; l++) {
+            System.out.printf("%d. %s - %.2f%n", l+1, sortedClusterNames[l], sortedFinalScores[l]);
+        }
+        System.out.println("=====================");
     }
     public static void addEvent(String eventName) {
+        // validate the entries
         if (eventCount > 19) {
             System.out.println("Max Events Reached.");
         } else {
@@ -80,7 +104,7 @@ public class clusterLeaderboard {
     }
 
     public static void recordScore(String cluster, String eventName, double score) {
-        
+        // validate the entries
         if (score < 0) {
             System.out.println("Negative Scores are not allowed.");
             return;
