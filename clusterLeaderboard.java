@@ -46,7 +46,8 @@ public class clusterLeaderboard {
                     showEvents();
                     break;
                 case 6:
-                    System.out.printf("Events Registered: %d%nScores Recorded: %d%nHighest Cluster: %.2f%nLowest Cluster: %.2f%n", eventCount, scoredCount, sortedClusterNames[0], sortedClusterNames[7]);
+                    sortLeaderboard();
+                    System.out.printf("Events Registered: %d%nScores Recorded: %d%nHighest Cluster: %s%nLowest Cluster: %s%n", eventCount, scoredCount, sortedClusterNames[0], sortedClusterNames[7]);
                     break;
                 default:
                     System.out.println("Invalid Output. Please try again.");
@@ -69,9 +70,7 @@ public class clusterLeaderboard {
         sc.nextLine();
         return choice;
     }
-
-    public static void showLeaderboard() {
-        // implement bubble sort
+    public static void sortLeaderboard() {
         for (int k = 0; k < 8; k++) {
             sortedClusterNames[k] = CLUSTER_NAMES[k];
             sortedFinalScores[k] = totalClusterScore[k];       
@@ -88,6 +87,9 @@ public class clusterLeaderboard {
                 }
             }
         }
+    }
+    public static void showLeaderboard() {
+        sortLeaderboard();
         System.out.println("=====LEADERBOARD=====");
         for (int l = 0; l < 8; l++) {
             System.out.printf("%d. %s - %.2f%n", l+1, sortedClusterNames[l], sortedFinalScores[l]);
