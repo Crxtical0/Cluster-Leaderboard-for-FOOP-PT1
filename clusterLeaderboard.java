@@ -1,14 +1,15 @@
 import java.util.Scanner;
 
 public class clusterLeaderboard {
-    static final String CLUSTER_NAMES[] = { "Manresa", "Pamplona", "Jerusalem", "Montserrat", "Paris", "Barcelona","Salamanca", "Rome" };
+    static final String CLUSTER_NAMES[] = { "Manresa", "Pamplona", "Jerusalem", "Montserrat", "Paris", "Barcelona",
+            "Salamanca", "Rome" };
     static final int MAX_CLUSTERS = 8;
     static final int MAX_EVENTS = 20;
     static String[] eventNames = new String[MAX_EVENTS];
     static double[] totalClusterScore = new double[MAX_CLUSTERS];
     static final int MAX_SCORES = 160;
     static double clusterEventScore[] = new double[MAX_SCORES];
-    static String clusterEventNameScored[] = new String[   MAX_SCORES];
+    static String clusterEventNameScored[] = new String[MAX_SCORES];
     static String clusterNameScored[] = new String[MAX_SCORES];
     static int scoredCount = 0;
     static int eventCount = 0;
@@ -98,15 +99,18 @@ public class clusterLeaderboard {
 
     public static void sortLeaderboard() {
         // sorts the clusters from most points to least points
-        // clusters with no registered scores will have their order based on the final constants
-        
-        // puts the cluster names and their score in a copy to be sorted without editing the original array
+        // clusters with no registered scores will have their order based on the final
+        // constants
+
+        // puts the cluster names and their score in a copy to be sorted without editing
+        // the original array
         for (int k = 0; k < MAX_CLUSTERS; k++) {
             sortedClusterNames[k] = CLUSTER_NAMES[k];
             sortedFinalScores[k] = totalClusterScore[k];
         }
-        
-        // uses bubble sort to sort the copied array for cluster names and respective scores from lowest to highest
+
+        // uses bubble sort to sort the copied array for cluster names and respective
+        // scores from lowest to highest
         for (int i = 0; i < MAX_CLUSTERS - 1; i++) {
             for (int j = 0; j < MAX_CLUSTERS - i - 1; j++) {
                 if (sortedFinalScores[j] < sortedFinalScores[j + 1]) {
@@ -133,7 +137,7 @@ public class clusterLeaderboard {
 
     public static void addEvent(String eventName) {
         // validates the entries and adds valid events
-        if (eventCount > (MAX_EVENTS - 1)) {
+        if (eventCount >= MAX_EVENTS) {
             System.out.println("Max Events Reached.");
         } else if (isValidName(eventName, eventNames)) {
             System.out.println("Event already Registered.");
@@ -161,6 +165,11 @@ public class clusterLeaderboard {
             System.out.println("No registered events");
             return;
         }
+
+        if (scoredCount >= MAX_SCORES) {
+            System.out.println("Maximum number of scores reached.");
+            return;
+        }
         if (score < 0) {
             System.out.println("Negative Scores are not allowed.");
             return;
@@ -178,7 +187,8 @@ public class clusterLeaderboard {
             }
         }
         System.out.println("Score successfully recorded!");
-        // increases the recorded score count to increase the index for the next recorded score (for the array to match)
+        // increases the recorded score count to increase the index for the next
+        // recorded score (for the array to match)
         scoredCount++;
     }
 
