@@ -11,7 +11,9 @@ public class clusterLeaderboard {
     static Scanner sc = new Scanner(System.in);
     static String sortedClusterNames[] = new String[8];
     static double sortedFinalScores[] = new double[8];
-    static final String CLUSTER_NAMES[] = {"Manresa", "Pamplona", "Jerusalem", "Montserrat", "Paris", "Barcelona", "Salamanca", "Rome"};
+    static final String CLUSTER_NAMES[] = { "Manresa", "Pamplona", "Jerusalem", "Montserrat", "Paris", "Barcelona",
+            "Salamanca", "Rome" };
+
     public static void main(String[] args) {
         int choice;
         String eventName;
@@ -31,6 +33,10 @@ public class clusterLeaderboard {
                 case 3:
                     System.out.println("Which cluster?");
                     cluster = sc.nextLine();
+                    if (!isValidName(cluster, CLUSTER_NAMES)) {
+                        System.out.println("Invalid Cluster.");
+                        break;
+                    }
                     if (eventCount == 0) {
                         System.out.println("No Events Registered.");
                         break;
@@ -39,7 +45,7 @@ public class clusterLeaderboard {
 
                     showEvents();
                     eventName = sc.nextLine();
-                    if (!isValidEvent(eventName)) {
+                    if (!isValidName(eventName, eventNames)) {
                         System.out.println("Invalid event. Please add the event first.");
                         break;
                     }
@@ -59,7 +65,9 @@ public class clusterLeaderboard {
                     sortLeaderboard();
                     System.out.println("======================================================");
                     System.out.println("Thank you for using the Cluster Leaderboard System!");
-                    System.out.printf("Events Registered: %d%nScores Recorded: %d%nHighest Cluster: %s%nLowest Cluster: %s%n", eventCount, scoredCount, sortedClusterNames[0], sortedClusterNames[7]);
+                    System.out.printf(
+                            "Events Registered: %d%nScores Recorded: %d%nHighest Cluster: %s%nLowest Cluster: %s%n",
+                            eventCount, scoredCount, sortedClusterNames[0], sortedClusterNames[7]);
                     System.out.println("======================================================");
                     break;
                 default:
@@ -83,10 +91,11 @@ public class clusterLeaderboard {
         sc.nextLine();
         return choice;
     }
+
     public static void sortLeaderboard() {
         for (int k = 0; k < 8; k++) {
             sortedClusterNames[k] = CLUSTER_NAMES[k];
-            sortedFinalScores[k] = totalClusterScore[k];       
+            sortedFinalScores[k] = totalClusterScore[k];
         }
         for (int i = 0; i < 8 - 1; i++) {
             for (int j = 0; j < 8 - i - 1; j++) {
@@ -101,18 +110,23 @@ public class clusterLeaderboard {
             }
         }
     }
+
     public static void showLeaderboard() {
         sortLeaderboard();
         System.out.println("=====LEADERBOARD=====");
         for (int l = 0; l < 8; l++) {
-            System.out.printf("%d. %s - %.2f%n", l+1, sortedClusterNames[l], sortedFinalScores[l]);
+            System.out.printf("%d. %s - %.2f%n", l + 1, sortedClusterNames[l], sortedFinalScores[l]);
         }
         System.out.println("=====================");
     }
+
     public static void addEvent(String eventName) {
         // validate the entries
         if (eventCount > 19) {
             System.out.println("Max Events Reached.");
+        } else if (isValidName(eventName, eventNames)) {
+            System.out.println("Event already Registered.");
+            return;
         } else {
             eventNames[eventCount] = eventName;
             eventCount++;
@@ -122,6 +136,16 @@ public class clusterLeaderboard {
     public static void recordScore(String cluster, String eventName, double score) {
         // validate the entries
         // integrate the add event here (use switch case)
+        if (!isValidName(cluster, CLUSTER_NAMES)) {
+            System.out.println("Invalid cluster.");
+            return;
+        }
+
+        if (!isValidName(eventName, eventNames)) {
+            System.out.println("Event not registered.");
+            return;
+        }
+
         if (eventCount < 0) {
             System.out.println("No registered events");
             return;
@@ -134,7 +158,7 @@ public class clusterLeaderboard {
         clusterNameScored[scoredCount] = cluster;
         clusterEventNameScored[scoredCount] = eventName;
         clusterEventScore[scoredCount] = score;
-        
+
         for (int i = 0; i < 8; i++) {
             if (cluster.equals(CLUSTER_NAMES[i])) {
                 totalClusterScore[i] = totalClusterScore[i] + score;
@@ -144,6 +168,7 @@ public class clusterLeaderboard {
         System.out.println("Score successfully recorded!");
         scoredCount++;
     }
+
     public static void showEvents() {
         if (eventCount == 0) {
             System.out.println("No Events Registered.");
@@ -156,16 +181,20 @@ public class clusterLeaderboard {
         }
     }
 
-    public static boolean isValidEvent(String eventName) {
-        for (int i = 0; i < eventCount; i++) {
-            if (eventNames[i].equals(eventName)) {
+    public static boolean isValidName(String name, String[] nameArray) {
+        for (int i = 0; i < nameArray.length; i++) {
+            if (nameArray[i] != null && nameArray[i].equals(name)) {
                 return true;
             }
         }
         return false;
     }
+
     public static void clusterSummary(String cluster) {
-        
+        if (!isValidName(cluster, CLUSTER_NAMES)) {
+            System.out.println("Invalid cluster.");
+            return;
+        }
         for (int i = 0; i < scoredCount; i++) {
             if (cluster.equals(clusterNameScored[i])) {
                 System.out.printf("Event Name: %s - %.2f%n", clusterEventNameScored[i], clusterEventScore[i]);
