@@ -47,7 +47,10 @@ public class clusterLeaderboard {
                     break;
                 case 6:
                     sortLeaderboard();
+                    System.out.println("======================================================");
+                    System.out.println("Thank you for using the Cluster Leaderboard System!");
                     System.out.printf("Events Registered: %d%nScores Recorded: %d%nHighest Cluster: %s%nLowest Cluster: %s%n", eventCount, scoredCount, sortedClusterNames[0], sortedClusterNames[7]);
+                    System.out.println("======================================================");
                     break;
                 default:
                     System.out.println("Invalid Output. Please try again.");
@@ -108,6 +111,11 @@ public class clusterLeaderboard {
 
     public static void recordScore(String cluster, String eventName, double score) {
         // validate the entries
+        // integrate the add event here (use switch case)
+        if (eventCount < 0) {
+            System.out.println("No registered events");
+            return;
+        }
         if (score < 0) {
             System.out.println("Negative Scores are not allowed.");
             return;
