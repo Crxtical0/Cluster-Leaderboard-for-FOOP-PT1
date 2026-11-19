@@ -1,45 +1,101 @@
 // Zack Ethan Ang && Ethan Jayden Jadulang
 /*
-Test Case 1: Valid Event and Score Recording
+Test Case 1: Adding an event and recording a score
 Input:
   - Add Event: Basketball
   - Record Score: Manresa, Basketball, 25
+  - View Cluster Summary: Manresa
 Expected Output:
-  - Event successfully registered.
-  - Score successfully recorded.
-  - Manresa's total score becomes 25.00.
-  
-Test Case 2: Duplicate Event Registration
+  - "Event successfully registered!"
+  - "Score successfully recorded!"
+  - "Event Name: Basketball - 25.00"
+  - "Total Scored Points: 25.00"
+
+Test Case 2: Checking leaderboard rankings
+Input:
+  - Add Event: Basketball
+  - Record Score: Manresa, Basketball, 25
+  - Record Score: Pamplona, Basketball, 15
+  - Show Leaderboard
+Expected Output:
+  - Event and both scores successfully recorded
+  - Manresa ranks 1st with 25.00 points
+  - Pamplona ranks 2nd with 15.00 points
+  - All remaining clusters have 0.00 points
+
+Test Case 3: Showing registered events
+Input:
+  - Show Registered Events
+  - Add Event: Basketball
+  - Add Event: Volleyball
+  - Show Registered Events
+Expected Output:
+  - Initially: "No Events Registered."
+  - Both events successfully registered
+  - Registered events displayed:
+      1. Basketball
+      2. Volleyball
+
+Test Case 4: Viewing a summary with multiple event scores
+Input:
+  - Add Event: Basketball
+  - Add Event: Volleyball
+  - Record Score: Manresa, Basketball, 25
+  - Record Score: Manresa, Volleyball, 12.50
+  - View Cluster Summary: Manresa
+Expected Output:
+  - Both events and scores successfully recorded
+  - "Event Name: Basketball - 25.00"
+  - "Event Name: Volleyball - 12.50"
+  - "Total Scored Points: 37.50"
+
+Test Case 5: Exiting and displaying the final summary
+Input:
+  - Add Event: Basketball
+  - Record Score: Manresa, Basketball, 25
+  - Exit
+Expected Output:
+  - "Thank you for using the Cluster Leaderboard System!"
+  - "Events Registered: 1"
+  - "Scores Recorded: 1"
+  - "Highest Cluster: Manresa"
+  - "Lowest Cluster: Rome"
+  - Program terminates
+
+Test Case 6: Adding a duplicate event
 Input:
   - Add Event: Basketball
   - Add Event: Basketball
 Expected Output:
-  - First input: Event successfully registered.
+  - First input: "Event successfully registered!"
   - Second input: "Event already Registered."
+  - Only one Basketball event is registered
 
-
-Test Case 3: Negative Score Validation
+Test Case 7: Recording a negative score
 Input:
+  - Add Event: Basketball
   - Record Score: Manresa, Basketball, -10
 Expected Output:
+  - "Event successfully registered!"
   - "Negative Scores are not allowed."
-  - Score is not recorded.
 
-
-Test Case 4: Invalid Cluster Name
+Test Case 8: Invalid cluster and unregistered event
 Input:
-  - Record Score: Hogwarts, Basketball, 20
+  - Add Event: Basketball
+  - Record Score:
+      Cluster: EthansCluster
+  - Record Score:
+      Cluster: Manresa
+      Event: Swimming
 Expected Output:
-  - "Invalid Cluster."
-  - Score is not recorded.
+  - First attempt: "Invalid Cluster."
+  - Second attempt: "Invalid event. Please add the event first."
 
-
-Test Case 5: Unregistered Event
+Test Case 9: Inputting a blank event
 Input:
-  - Record Score: Manresa, Swimming, 15
+  - Add Event: ""
 Expected Output:
-   - "Invalid event. Please add the event first."
-   - Score is not recorded.
+  - First attempt: "Please input an event."
  */
 
 import java.util.Scanner;
@@ -135,7 +191,7 @@ public class clusterLeaderboard {
         System.out.println("========CLUSTER LEADERBOARD========");
         System.out.println("1. View Current Leaderboard (1)");
         System.out.println("2. Add Event Name (2)");
-        System.out.println("3. Record Competition Score (3)");
+        System.out.println("3. Record Score (3)");
         System.out.println("4. View Cluster Summary (4)");
         System.out.println("5. Show Registered Events (5)");
         System.out.println("6. Exit (6)");
@@ -188,7 +244,8 @@ public class clusterLeaderboard {
         // validates the entries and adds valid events
         if (eventCount >= MAX_EVENTS) {
             System.out.println("Max Events Reached.");
-        } else if(eventName.equals("")) {
+            //uses method overloading to remove all blank spaces and checks if the string is empty
+        } else if(eventName.trim().isEmpty()) {
             System.out.println("Please input an event.");
         } else if (isValidName(eventName, eventNames)) {
             System.out.println("Event already Registered.");
