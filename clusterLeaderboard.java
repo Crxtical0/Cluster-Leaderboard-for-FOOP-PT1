@@ -46,9 +46,8 @@ public class clusterLeaderboard {
                         System.out.println("No Events Registered.");
                         break;
                     }
-                    System.out.println("Which event?");
-
                     showEvents();
+                    System.out.println("Which event?");
                     eventName = sc.nextLine();
                     if (!isValidName(eventName, eventNames)) {
                         System.out.println("Invalid event. Please add the event first.");
