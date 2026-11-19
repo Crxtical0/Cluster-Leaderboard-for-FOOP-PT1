@@ -1,3 +1,5 @@
+// Zack Ethan Ang && Ethan Jayden Jadulang
+// input test cases here
 import java.util.Scanner;
 
 public class clusterLeaderboard {
@@ -69,9 +71,15 @@ public class clusterLeaderboard {
                     sortLeaderboard();
                     System.out.println("======================================================");
                     System.out.println("Thank you for using the Cluster Leaderboard System!");
+                    String highestCluster = "No Recorded Score";
+                    String lowestCluster = "No Recorded Score";
+                    if (scoredCount > 0) {
+                        highestCluster = sortedClusterNames[0];
+                        lowestCluster = sortedClusterNames[MAX_CLUSTERS - 1];
+                    }
                     System.out.printf(
                             "Events Registered: %d%nScores Recorded: %d%nHighest Cluster: %s%nLowest Cluster: %s%n",
-                            eventCount, scoredCount, sortedClusterNames[0], sortedClusterNames[7]);
+                            eventCount, scoredCount, highestCluster, lowestCluster);
                     System.out.println("======================================================");
                     break;
                 default:
@@ -110,7 +118,7 @@ public class clusterLeaderboard {
         }
 
         // uses bubble sort to sort the copied array for cluster names and respective
-        // scores from lowest to highest
+        // scores from highest to lowest
         for (int i = 0; i < MAX_CLUSTERS - 1; i++) {
             for (int j = 0; j < MAX_CLUSTERS - i - 1; j++) {
                 if (sortedFinalScores[j] < sortedFinalScores[j + 1]) {
@@ -128,20 +136,21 @@ public class clusterLeaderboard {
     public static void showLeaderboard() {
         sortLeaderboard();
         // prints the leaderboard from top 1 to top 8
-        System.out.println("=====LEADERBOARD=====");
+        System.out.println("==========LEADERBOARD==========");
         for (int l = 0; l < MAX_CLUSTERS; l++) {
-            System.out.printf("%d. %s - %.2f%n", l + 1, sortedClusterNames[l], sortedFinalScores[l]);
+            System.out.printf("%d. %-10s - %8.2f%n", l + 1, sortedClusterNames[l], sortedFinalScores[l]);
         }
-        System.out.println("=====================");
+        System.out.println("===============================");
     }
 
     public static void addEvent(String eventName) {
         // validates the entries and adds valid events
         if (eventCount >= MAX_EVENTS) {
             System.out.println("Max Events Reached.");
+        } else if(eventName.equals("")) {
+            System.out.println("Please input an event.");
         } else if (isValidName(eventName, eventNames)) {
             System.out.println("Event already Registered.");
-            return;
         } else {
             eventNames[eventCount] = eventName;
             eventCount++;
@@ -181,7 +190,7 @@ public class clusterLeaderboard {
 
         // adds the score to the total of the matching cluster
         for (int i = 0; i < MAX_CLUSTERS; i++) {
-            if (cluster.equals(CLUSTER_NAMES[i])) {
+            if (cluster.equalsIgnoreCase(CLUSTER_NAMES[i])) {
                 totalClusterScore[i] = totalClusterScore[i] + score;
                 break;
             }
@@ -208,7 +217,7 @@ public class clusterLeaderboard {
     public static boolean isValidName(String name, String[] nameArray) {
         // checks if the name of an event or cluster is valid
         for (int i = 0; i < nameArray.length; i++) {
-            if (nameArray[i] != null && nameArray[i].equals(name)) {
+            if (nameArray[i] != null && nameArray[i].equalsIgnoreCase(name)) {
                 return true;
             }
         }
@@ -223,14 +232,14 @@ public class clusterLeaderboard {
         }
         // prints the recorded event names with a recorded score from the chosen cluster
         for (int i = 0; i < scoredCount; i++) {
-            if (cluster.equals(clusterNameScored[i])) {
+            if (cluster.equalsIgnoreCase(clusterNameScored[i])) {
                 System.out.printf("Event Name: %s - %.2f%n", clusterEventNameScored[i], clusterEventScore[i]);
             }
         }
         // shows the total points of a cluster
         for (int j = 0; j < MAX_CLUSTERS; j++) {
-            if (CLUSTER_NAMES[j].equals(cluster)) {
-                System.out.println("Total Scored Points: " + totalClusterScore[j]);
+            if (CLUSTER_NAMES[j].equalsIgnoreCase(cluster)) {
+                System.out.printf("Total Scored Points: %.2f%n", totalClusterScore[j]);
                 break;
             }
         }
