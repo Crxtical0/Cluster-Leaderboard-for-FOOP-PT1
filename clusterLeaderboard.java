@@ -2,101 +2,154 @@
 /*
 Test Case 1: Adding an event and recording a score
 Input:
-  - Add Event: Basketball
-  - Record Score: Manresa, Basketball, 25
-  - View Cluster Summary: Manresa
-Expected Output:
-  - "Event successfully registered!"
-  - "Score successfully recorded!"
-  - "Event Name: Basketball - 25.00"
-  - "Total Scored Points: 25.00"
+2
+Basketball
+3
+Manresa
+Basketball
+25
+4
+Manresa
+
+Output:
+Event successfully registered!
+Score successfully recorded!
+Event Name: Basketball - 25.00
+Total Scored Points: 25.00
 
 Test Case 2: Checking leaderboard rankings
 Input:
-  - Add Event: Basketball
-  - Record Score: Manresa, Basketball, 25
-  - Record Score: Pamplona, Basketball, 15
-  - Show Leaderboard
-Expected Output:
-  - Event and both scores successfully recorded
-  - Manresa ranks 1st with 25.00 points
-  - Pamplona ranks 2nd with 15.00 points
-  - All remaining clusters have 0.00 points
+2
+Basketball
+3
+Manresa
+Basketball
+25
+3
+Pamplona
+Basketball
+15
+1
+
+Output:
+Event successfully registered!
+Score successfully recorded!
+Score successfully recorded!
+1. Manresa - 25.00
+2. Pamplona - 15.00
+
+Note: Copy the remaining clusters' 0.00 rows from the actual run.
 
 Test Case 3: Showing registered events
 Input:
-  - Show Registered Events
-  - Add Event: Basketball
-  - Add Event: Volleyball
-  - Show Registered Events
-Expected Output:
-  - Initially: "No Events Registered."
-  - Both events successfully registered
-  - Registered events displayed:
-      1. Basketball
-      2. Volleyball
+5
+2
+Basketball
+2
+Volleyball
+5
+
+Output:
+No Events Registered.
+Event successfully registered!
+Event successfully registered!
+1. Basketball
+2. Volleyball
 
 Test Case 4: Viewing a summary with multiple event scores
 Input:
-  - Add Event: Basketball
-  - Add Event: Volleyball
-  - Record Score: Manresa, Basketball, 25
-  - Record Score: Manresa, Volleyball, 12.50
-  - View Cluster Summary: Manresa
-Expected Output:
-  - Both events and scores successfully recorded
-  - "Event Name: Basketball - 25.00"
-  - "Event Name: Volleyball - 12.50"
-  - "Total Scored Points: 37.50"
+2
+Basketball
+2
+Volleyball
+3
+Manresa
+Basketball
+25
+3
+Manresa
+Volleyball
+12.50
+4
+Manresa
+
+Output:
+Event successfully registered!
+Event successfully registered!
+Score successfully recorded!
+Score successfully recorded!
+Event Name: Basketball - 25.00
+Event Name: Volleyball - 12.50
+Total Scored Points: 37.50
 
 Test Case 5: Exiting and displaying the final summary
 Input:
-  - Add Event: Basketball
-  - Record Score: Manresa, Basketball, 25
-  - Exit
-Expected Output:
-  - "Thank you for using the Cluster Leaderboard System!"
-  - "Events Registered: 1"
-  - "Scores Recorded: 1"
-  - "Highest Cluster: Manresa"
-  - "Lowest Cluster: Rome"
-  - Program terminates
+2
+Basketball
+3
+Manresa
+Basketball
+25
+6
+
+Output:
+Event successfully registered!
+Score successfully recorded!
+Thank you for using the Cluster Leaderboard System!
+Events Registered: 1
+Scores Recorded: 1
+Highest Cluster: Manresa
+Lowest Cluster: Rome
 
 Test Case 6: Adding a duplicate event
 Input:
-  - Add Event: Basketball
-  - Add Event: Basketball
-Expected Output:
-  - First input: "Event successfully registered!"
-  - Second input: "Event already Registered."
-  - Only one Basketball event is registered
+2
+Basketball
+2
+Basketball
+
+Output:
+Event successfully registered!
+Event already Registered.
 
 Test Case 7: Recording a negative score
 Input:
-  - Add Event: Basketball
-  - Record Score: Manresa, Basketball, -10
-Expected Output:
-  - "Event successfully registered!"
-  - "Negative Scores are not allowed."
+2
+Basketball
+3
+Manresa
+Basketball
+-10
+
+Output:
+Event successfully registered!
+Negative Scores are not allowed.
 
 Test Case 8: Invalid cluster and unregistered event
 Input:
-  - Add Event: Basketball
-  - Record Score:
-      Cluster: EthansCluster
-  - Record Score:
-      Cluster: Manresa
-      Event: Swimming
-Expected Output:
-  - First attempt: "Invalid Cluster."
-  - Second attempt: "Invalid event. Please add the event first."
+2
+Basketball
+3
+EthansCluster
+3
+Manresa
+Swimming
+
+Output:
+Event successfully registered!
+Invalid Cluster.
+Invalid event. Please add the event first.
 
 Test Case 9: Inputting a blank event
 Input:
-  - Add Event: ""
-Expected Output:
-  - First attempt: "Please input an event."
- */
+2
+
+
+Output:
+Please input an event.
+(The blank line after 2 means pressing Enter without
+typing an event name.)
+*/
 
 import java.util.Scanner;
 
@@ -234,8 +287,17 @@ public class clusterLeaderboard {
         sortLeaderboard();
         // prints the leaderboard from top 1 to top 8
         System.out.println("==========LEADERBOARD==========");
+        int rank = 1;
+
         for (int l = 0; l < MAX_CLUSTERS; l++) {
-            System.out.printf("%d. %-10s - %8.2f%n", l + 1, sortedClusterNames[l], sortedFinalScores[l]);
+            if (l > 0 && sortedFinalScores[l] != sortedFinalScores[l - 1]) {
+                rank = l + 1;
+            }
+
+            // Print rank instead of l + 1 so it keeps the clusters with the same score same
+            // ranking
+            System.out.printf("%d. %-10s - %8.2f%n",
+                    rank, sortedClusterNames[l], sortedFinalScores[l]);
         }
         System.out.println("===============================");
     }
@@ -244,8 +306,9 @@ public class clusterLeaderboard {
         // validates the entries and adds valid events
         if (eventCount >= MAX_EVENTS) {
             System.out.println("Max Events Reached.");
-            //uses method overloading to remove all blank spaces and checks if the string is empty
-        } else if(eventName.trim().isEmpty()) {
+            // uses method overloading to remove all blank spaces and checks if the string
+            // is empty
+        } else if (eventName.trim().isEmpty()) {
             System.out.println("Please input an event.");
         } else if (isValidName(eventName, eventNames)) {
             System.out.println("Event already Registered.");
@@ -283,7 +346,12 @@ public class clusterLeaderboard {
         }
         // records the scores of the corresponding cluster
         clusterNameScored[scoredCount] = cluster;
-        clusterEventNameScored[scoredCount] = eventName;
+        for (int i = 0; i < eventCount; i++) {
+            if (eventNames[i].equalsIgnoreCase(eventName)) {
+                clusterEventNameScored[scoredCount] = eventNames[i];
+                break;
+            }
+        }
         clusterEventScore[scoredCount] = score;
 
         // adds the score to the total of the matching cluster
