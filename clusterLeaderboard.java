@@ -1,5 +1,47 @@
 // Zack Ethan Ang && Ethan Jayden Jadulang
-// input test cases here
+/*
+Test Case 1: Valid Event and Score Recording
+Input:
+  - Add Event: Basketball
+  - Record Score: Manresa, Basketball, 25
+Expected Output:
+  - Event successfully registered.
+  - Score successfully recorded.
+  - Manresa's total score becomes 25.00.
+  
+Test Case 2: Duplicate Event Registration
+Input:
+  - Add Event: Basketball
+  - Add Event: Basketball
+Expected Output:
+  - First input: Event successfully registered.
+  - Second input: "Event already Registered."
+
+
+Test Case 3: Negative Score Validation
+Input:
+  - Record Score: Manresa, Basketball, -10
+Expected Output:
+  - "Negative Scores are not allowed."
+  - Score is not recorded.
+
+
+Test Case 4: Invalid Cluster Name
+Input:
+  - Record Score: Hogwarts, Basketball, 20
+Expected Output:
+  - "Invalid Cluster."
+  - Score is not recorded.
+
+
+Test Case 5: Unregistered Event
+Input:
+  - Record Score: Manresa, Swimming, 15
+Expected Output:
+   - "Invalid event. Please add the event first."
+   - Score is not recorded.
+ */
+
 import java.util.Scanner;
 
 public class clusterLeaderboard {
