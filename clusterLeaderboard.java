@@ -268,7 +268,8 @@ public class clusterLeaderboard {
                     break;
                 case 2:
                     System.out.println("What is the Event Name?");
-                    eventName = sc.nextLine();
+                    // trim to avoid spaces messing up the event names
+                    eventName = sc.nextLine().trim();
                     addEvent(eventName);
                     break;
                 case 3:
