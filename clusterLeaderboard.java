@@ -1,6 +1,6 @@
 // Zack Ethan Ang && Ethan Jayden Jadulang
 /*
-Test Case 1: Adding an event and recording a score
+Test Case 1: Adding an event and viewing a cluster summary
 Input:
 2
 Basketball
@@ -10,14 +10,71 @@ Basketball
 25
 4
 Manresa
+6
 
 Output:
+========CLUSTER LEADERBOARD========
+1. View Current Leaderboard (1)
+2. Add Event Name (2)
+3. Record Score (3)
+4. View Cluster Summary (4)
+5. Show Registered Events (5)
+6. Exit (6)
+===================================
+Enter choice: 
+What is the Event Name?
+
 Event successfully registered!
+========CLUSTER LEADERBOARD========
+1. View Current Leaderboard (1)
+2. Add Event Name (2)
+3. Record Score (3)
+4. View Cluster Summary (4)
+5. Show Registered Events (5)
+6. Exit (6)
+===================================
+Enter choice: 
+Which cluster?
+
+=====REGISTERED EVENTS=====
+1. Basketball
+===========================
+Which event?
+
+How many points?
+
 Score successfully recorded!
+========CLUSTER LEADERBOARD========
+1. View Current Leaderboard (1)
+2. Add Event Name (2)
+3. Record Score (3)
+4. View Cluster Summary (4)
+5. Show Registered Events (5)
+6. Exit (6)
+===================================
+Enter choice: 
+Which cluster?
+
 Event Name: Basketball - 25.00
 Total Scored Points: 25.00
+========CLUSTER LEADERBOARD========
+1. View Current Leaderboard (1)
+2. Add Event Name (2)
+3. Record Score (3)
+4. View Cluster Summary (4)
+5. Show Registered Events (5)
+6. Exit (6)
+===================================
+Enter choice: 
+======================================================
+Thank you for using the Cluster Leaderboard System!
+Events Registered: 1
+Scores Recorded: 1
+Highest Cluster: Manresa
+Lowest Cluster: Rome
+======================================================
 
-Test Case 2: Checking leaderboard rankings
+Test Case 2: Checking leaderboard rankings and adding an event
 Input:
 2
 Basketball
@@ -30,89 +87,96 @@ Pamplona
 Basketball
 15
 1
-
-Output:
-Event successfully registered!
-Score successfully recorded!
-Score successfully recorded!
-1. Manresa - 25.00
-2. Pamplona - 15.00
-
-Note: Also copies the remaining clusters' 0.00 rows from the actual run
-
-Test Case 3: Showing registered events
-Input:
-5
-2
-Basketball
-2
-Volleyball
-5
-
-Output:
-No Events Registered.
-Event successfully registered!
-Event successfully registered!
-1. Basketball
-2. Volleyball
-
-Test Case 4: Viewing a summary with multiple event scores
-Input:
-2
-Basketball
-2
-Volleyball
-3
-Manresa
-Basketball
-25
-3
-Manresa
-Volleyball
-12.50
-4
-Manresa
-
-Output:
-Event successfully registered!
-Event successfully registered!
-Score successfully recorded!
-Score successfully recorded!
-Event Name: Basketball - 25.00
-Event Name: Volleyball - 12.50
-Total Scored Points: 37.50
-
-Test Case 5: Exiting and displaying the final summary
-Input:
-2
-Basketball
-3
-Manresa
-Basketball
-25
 6
 
 Output:
+========CLUSTER LEADERBOARD========
+1. View Current Leaderboard (1)
+2. Add Event Name (2)
+3. Record Score (3)
+4. View Cluster Summary (4)
+5. Show Registered Events (5)
+6. Exit (6)
+===================================
+Enter choice: 
+What is the Event Name?
+
 Event successfully registered!
+========CLUSTER LEADERBOARD========
+1. View Current Leaderboard (1)
+2. Add Event Name (2)
+3. Record Score (3)
+4. View Cluster Summary (4)
+5. Show Registered Events (5)
+6. Exit (6)
+===================================
+Enter choice: 
+Which cluster?
+
+=====REGISTERED EVENTS=====
+1. Basketball
+===========================
+Which event?
+
+How many points?
+
 Score successfully recorded!
+========CLUSTER LEADERBOARD========
+1. View Current Leaderboard (1)
+2. Add Event Name (2)
+3. Record Score (3)
+4. View Cluster Summary (4)
+5. Show Registered Events (5)
+6. Exit (6)
+===================================
+Enter choice: 
+Which cluster?
+
+=====REGISTERED EVENTS=====
+1. Basketball
+===========================
+Which event?
+
+How many points?
+
+Score successfully recorded!
+========CLUSTER LEADERBOARD========
+1. View Current Leaderboard (1)
+2. Add Event Name (2)
+3. Record Score (3)
+4. View Cluster Summary (4)
+5. Show Registered Events (5)
+6. Exit (6)
+===================================
+Enter choice: 
+==========LEADERBOARD==========
+1. Manresa    -    25.00
+2. Pamplona   -    15.00
+3. Jerusalem  -     0.00
+3. Montserrat -     0.00
+3. Paris      -     0.00
+3. Barcelona  -     0.00
+3. Salamanca  -     0.00
+3. Rome       -     0.00
+===============================
+========CLUSTER LEADERBOARD========
+1. View Current Leaderboard (1)
+2. Add Event Name (2)
+3. Record Score (3)
+4. View Cluster Summary (4)
+5. Show Registered Events (5)
+6. Exit (6)
+===================================
+Enter choice: 
+======================================================
 Thank you for using the Cluster Leaderboard System!
 Events Registered: 1
-Scores Recorded: 1
+Scores Recorded: 2
 Highest Cluster: Manresa
 Lowest Cluster: Rome
+======================================================
 
-Test Case 6: Adding a duplicate event
-Input:
-2
-Basketball
-2
-Basketball
-
-Output:
-Event successfully registered!
-Event already Registered.
-
-Test Case 7: Recording a negative score
+Test Case 3: Rejecting a negative score
 Input:
 2
 Basketball
@@ -120,35 +184,56 @@ Basketball
 Manresa
 Basketball
 -10
+6
 
 Output:
+========CLUSTER LEADERBOARD========
+1. View Current Leaderboard (1)
+2. Add Event Name (2)
+3. Record Score (3)
+4. View Cluster Summary (4)
+5. Show Registered Events (5)
+6. Exit (6)
+===================================
+Enter choice: 
+What is the Event Name?
+
 Event successfully registered!
+========CLUSTER LEADERBOARD========
+1. View Current Leaderboard (1)
+2. Add Event Name (2)
+3. Record Score (3)
+4. View Cluster Summary (4)
+5. Show Registered Events (5)
+6. Exit (6)
+===================================
+Enter choice: 
+Which cluster?
+
+=====REGISTERED EVENTS=====
+1. Basketball
+===========================
+Which event?
+
+How many points?
+
 Negative Scores are not allowed.
-
-Test Case 8: Invalid cluster and unregistered event
-Input:
-2
-Basketball
-3
-EthansCluster
-3
-Manresa
-Swimming
-
-Output:
-Event successfully registered!
-Invalid Cluster.
-Invalid event. Please add the event first.
-
-Test Case 9: Inputting a blank event
-Input:
-2
-
-
-Output:
-Please input an event.
-(The blank line after 2 means pressing Enter without
-typing an event name.)
+========CLUSTER LEADERBOARD========
+1. View Current Leaderboard (1)
+2. Add Event Name (2)
+3. Record Score (3)
+4. View Cluster Summary (4)
+5. Show Registered Events (5)
+6. Exit (6)
+===================================
+Enter choice: 
+======================================================
+Thank you for using the Cluster Leaderboard System!
+Events Registered: 1
+Scores Recorded: 0
+Highest Cluster: No Recorded Score
+Lowest Cluster: No Recorded Score
+======================================================
 */
 
 import java.util.Scanner;
