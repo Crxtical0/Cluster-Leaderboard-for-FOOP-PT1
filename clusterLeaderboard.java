@@ -285,7 +285,8 @@ public class clusterLeaderboard {
                     }
                     showEvents();
                     System.out.println("Which event?");
-                    eventName = sc.nextLine();
+                    // trim to avoid spaces messing up the event names
+                    eventName = sc.nextLine().trim();
                     if (!isValidName(eventName, eventNames)) {
                         System.out.println("Invalid event. Please add the event first.");
                         break;
