@@ -391,7 +391,7 @@ public class clusterLeaderboard {
         // validates the entries and adds valid events
         if (eventCount >= MAX_EVENTS) {
             System.out.println("Max Events Reached.");
-            // uses method overloading to remove all blank spaces and checks if the string
+            // uses method chaining to remove all blank spaces and checks if the string
             // is empty
         } else if (eventName.trim().isEmpty()) {
             System.out.println("Please input an event.");
