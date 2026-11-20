@@ -38,7 +38,7 @@ Score successfully recorded!
 1. Manresa - 25.00
 2. Pamplona - 15.00
 
-Note: Copy the remaining clusters' 0.00 rows from the actual run.
+Note: Also copies the remaining clusters' 0.00 rows from the actual run
 
 Test Case 3: Showing registered events
 Input:
